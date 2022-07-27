@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 router.get('/', async(req, res, next) => {
   //res.render('index', { title: 'Express' });
  const books = await Book.findAll();
- res.render( books.map(book => book.toJSON()) );
+ res.render( "index"({books}));
  
  });
 
