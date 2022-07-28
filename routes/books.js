@@ -51,15 +51,11 @@ router.post('/:id/edit',asyncHandler(async(req,res)=> {
 
 // //Delete book router
 router.get("/:id/delete",asyncHandler(async(req,res) => {
+  const book = await Book.findByPk(req.para.id);
+  await article.destroy();
   res.render("book/delete", {book: {}, title:"Delete Book"});
 }));
 
 
-
-
-
- 
-
- router.get('/books/new')
 
 module.exports = router;
