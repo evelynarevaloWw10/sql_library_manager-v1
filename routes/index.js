@@ -5,6 +5,7 @@ var router = express.Router();
 //redirect into books file
 router.get('/', (req, res, next) => {
   res.redirect('/books')
+  
  });
 
 
