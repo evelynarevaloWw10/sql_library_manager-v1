@@ -1,7 +1,13 @@
-doctype html
+extend layout 
+
+
+block content
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    | doctype html
+    | html
+    | head
+    | title= title
+    | body
+    | block content

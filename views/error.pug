@@ -1,20 +1,5 @@
 extends layout
-
+​
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
-//- <!DOCTYPE html>
-//- <html>
-
-//- <head>
-//-     <title>Page Not Found</title>
-//-     <link rel="stylesheet" href="../public/stylesheets/style.css">
-//- </head>
-
-//- <body>
-//-     <h1>Server Error</h1>
-//-     <p>Sorry! There was an unexpected error on the server.</p>
-//- </body>
-
-//- </html>
+  h1= title
+  p= error.message

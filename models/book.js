@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     validate: {
       notEmpty: {
         // custom error message
-        msg: 'Please provide a value for "title"',
+        msg: '"Title" is required',
        }
       }
     },
