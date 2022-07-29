@@ -17,22 +17,22 @@ function asyncHandler(cb){
 }
 
 /* GET home page. */
-router.get('/', async function(req, res, next){
-  res.redirect("/books")
-});
+ router.get('/', async function(req, res, next){
+   res.redirect("/books")
+ });
 
 
 //Get Book listing 
 router.get('/books', asyncHandler(async(req, res) => {
     const books = await book.findAll();
-    res.render("index", { books:books, title: "Books" });
+    res.render("index", { books, title: "Books" });
 }));
 
 
 
 // gets /books/new-create new book form 
 router.get('/books/new', asyncHandler( async(req,res) => {
-  res.render("new-book",{book:{}, title: "New Book"});
+  res.render("new-book",{ books:{}, title: "New Book"});
 }));
 
 
