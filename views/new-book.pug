@@ -12,7 +12,7 @@ block content
             ul.error    
                 each error in errors 
                     li= error.message
-      form
+      form(method="post")
         p
           label(for='title') Title
           input#title(name='title' type='text')

@@ -59,7 +59,7 @@ router.get("/books/:id", asyncHandler(async(req,res) => {
   if(book){
   res.render("update-book", {book});
   }else {
-    res.renderStatus(404);
+    res.render("page-not-found");
   }
 }));
 
@@ -92,9 +92,9 @@ router.post("/books/:id/delete",asyncHandler(async(req,res) => {
   const book = await Book.findByPk(req.para.id);
   if(book){
      await Book.destroy();
-  res.redirect("/books")
+  res.redirect("/books/")
   }else{
-    res.sendStatus(404);
+    res.render("page-not-found");
   }
  
 }));
