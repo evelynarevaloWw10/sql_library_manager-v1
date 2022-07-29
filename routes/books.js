@@ -3,7 +3,7 @@ var router = express.Router();
 var createError = require('http-errors');
 
 //imports book Model
-const book = require('../models').Book;
+const Book = require('../models').Book;
 
 // hander function to wrap each function
 function asyncHandler(cb){
@@ -24,7 +24,7 @@ function asyncHandler(cb){
 
 //Get Book listing 
 router.get('/books', asyncHandler(async(req, res) => {
-    const books = await book.findAll();
+    const books = await Book.findAll();
     res.render("index", { books, title: "Books" });
 }));
 
@@ -40,11 +40,11 @@ router.get('/books/new', asyncHandler( async(req,res) => {
 router.post('/books/new', asyncHandler(async(req, res) => {
   let book;
   try{
-  book = await book.create(req.body);
+  book = await Book.create(req.body);
   res.redirect("/books" + book.id);
   }catch(error){
     if (error.name === "SequelizeValidationError"){
-      book = await book.build(req.body);
+      book = await Book.build(req.body);
       res.render("new-book",{book, errors:error.errors, title: "New Book"})
     }else{
       throw error;
@@ -55,7 +55,7 @@ router.post('/books/new', asyncHandler(async(req, res) => {
 
 //show book detail form
 router.get("/books/:id", asyncHandler(async(req,res) => {
-  const book = await book.findByPk(req.params.id);
+  const book = await Book.findByPk(req.params.id);
   if(book){
   res.render("update-book", {book});
   }else {
@@ -68,16 +68,16 @@ router.get("/books/:id", asyncHandler(async(req,res) => {
 router.post('/books/:id',asyncHandler(async(req,res)=> {
   let book;
   try {
-    book = await book.findByPk(req.params.id);
+    book = await Book.findByPk(req.params.id);
     if (book) {
-      await book.update(req.body);
+      await Book.update(req.body);
       res.redirect("/books/");
     } else {
       res.render("page-not-found");
     }
   } catch (error) {
     if (error.name === "SequelizeValidationError") {
-      book = await book.build(req.body);
+      book = await Book.build(req.body);
       book.id = req.params.id; // make sure correct article gets updated
       res.render("update-book", { book, errors: error.errors });
     } else {
@@ -89,9 +89,9 @@ router.post('/books/:id',asyncHandler(async(req,res)=> {
 
 // //Delete book router
 router.post("/books/:id/delete",asyncHandler(async(req,res) => {
-  const book = await book.findByPk(req.para.id);
+  const book = await Book.findByPk(req.para.id);
   if(book){
-     await book.destroy();
+     await Book.destroy();
   res.redirect("/books")
   }else{
     res.sendStatus(404);
