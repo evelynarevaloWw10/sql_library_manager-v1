@@ -1,9 +1,9 @@
-extends /layout
+extends layout
 block content   
     h2 Update Book
-    include error 
+    
     form(action="/new", method="post")
-        include form
+        
         p
             label(for='title') Title
             input(name='title' type='text' value=book.title id='title')
