@@ -1,3 +1,6 @@
+// book model that was created when I ran npx sequelize model:create --name Book --attributes title:string,author:string,genre:string,year:integer.
+// here I added validators and custom messages and also made sure to add key value pairs to the properities.
+
 'use strict';
 const {
   Model

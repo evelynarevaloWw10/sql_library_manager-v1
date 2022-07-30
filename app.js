@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 
 
+//tests connection to database and syncs the model 
 app.use('/', booksRouter);
 (async () => {
   await sequelize.sync();

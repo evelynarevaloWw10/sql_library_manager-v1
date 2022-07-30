@@ -1,3 +1,5 @@
+//combined index and book routes 
+
 var express = require('express');
 var router = express.Router();
 var createError = require('http-errors');
@@ -22,7 +24,7 @@ function asyncHandler(cb){
  });
 
 
-//Get Book listing 
+//Shows the full list of books and renders to index page
 router.get('/books', asyncHandler(async(req, res) => {
     const books = await Book.findAll();
     res.render("index", { books, title: "Books" });
@@ -30,18 +32,18 @@ router.get('/books', asyncHandler(async(req, res) => {
 
 
 
-// gets /books/new-create new book form 
+// Shows the create new book form and renders new-book pug
 router.get('/books/new', asyncHandler( async(req,res) => {
   res.render("new-book",{ books:{}, title: "New Book"});
 }));
 
 
-//Post Book-post new book to datatbase
+//Posts a new book to the database
 router.post('/books/new', asyncHandler(async(req, res) => {
   let book;
   try{
   book = await Book.create(req.body);
-  res.redirect("/books" + book.id);
+  res.redirect("/");
   }catch(error){
     if (error.name === "SequelizeValidationError"){
       book = await Book.build(req.body);
@@ -70,7 +72,7 @@ router.post('/books/:id',asyncHandler(async(req,res)=> {
   try {
     book = await Book.findByPk(req.params.id);
     if (book) {
-      await Book.update(req.body);
+      await book.update(req.body);
       res.redirect("/books/");
     } else {
       res.render("page-not-found");
@@ -89,9 +91,9 @@ router.post('/books/:id',asyncHandler(async(req,res)=> {
 
 // //Delete book router
 router.post("/books/:id/delete",asyncHandler(async(req,res) => {
-  const book = await Book.findByPk(req.para.id);
+  const book = await Book.findByPk(req.params.id);
   if(book){
-     await Book.destroy();
+     await book.destroy();
   res.redirect("/books/")
   }else{
     res.render("page-not-found");
